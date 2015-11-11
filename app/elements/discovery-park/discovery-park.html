@@ -22,9 +22,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 500px;
       }
 
+      .header {
+        @apply(--layout-horizontal);
+      }
+
+      .about-route {
+        padding: 0px 16px 0px 16px;
+        @apply(--layout-flex);
+      }
+
       .map-container {
-        height: 100%;
+        width: 500px;
+        height: 500px;
         margin: 0px 0px 32px 0px;
+        @apply(--layout-flex);
       }
 
       .departure-card {
@@ -32,14 +43,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 700px;
       }
     </style>
-    
-    <paper-material class="map-container">
-    <google-map latitude="37.77493" longitude="-122.41942" fit-to-markers>
-      <google-map-marker latitude="37.779" longitude="-122.3892"
-          draggable="true" title="Go Giants!"></google-map-marker>
-      <google-map-marker latitude="37.777" longitude="-122.38911"></google-map-marker>
-    </google-map>
-    </paper-material>
+
+    <div class="header">
+      <div class="about-route">
+        <h1 style="font-weight:300; color:grey; font-size:32px;">No campus too far</h1>
+        <p>The Discovery Park shuttle will take students all the way out to Discovery Park in <b>15 minutes</b> or less.</p>
+        <p></p>
+      </div>
+      
+      <paper-material class="map-container">
+      <google-map latitude="37.77493" longitude="-122.41942" fit-to-markers>
+        <google-map-marker latitude="37.779" longitude="-122.3892"
+            draggable="true" title="Go Giants!"></google-map-marker>
+        <google-map-marker latitude="37.777" longitude="-122.38911"></google-map-marker>
+      </google-map>
+      </paper-material>
+    </div>
 
     <paper-material elevation="1" class="departure-card">
       <paper-tabs>
