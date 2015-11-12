@@ -13,13 +13,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/google-map/google-map-marker.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="components/neon-animation/animations/fade-out-animation.html">
 
 <dom-module id="discovery-park">
   <template>
     <style>
       :host {
         display: block;
-        height: 500px;
       }
 
       .header {
@@ -27,8 +36,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .about-route {
-        padding: 0px 16px 0px 16px;
+        padding: 0px 64px 0px 16px;
         @apply(--layout-flex);
+      }
+
+      .about-route-header {
+        font-weight:300; 
+        color:var(--secondary-text-color);
+        font-size:40px;
       }
 
       .map-container {
@@ -38,35 +53,156 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--layout-flex);
       }
 
-      .departure-card {
-        background-color: white;
-        height: 700px;
+      .departure-times {
+        width: 100%;
+        height: 900px;
+
+      }
+
+      .GAB {
+        margin-top: 16px;
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+      }
+
+      .DP {
+        margin-top: 16px;
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+      }
+
+      .time-table {
+        margin-top: 32px;
+      }
+
+      .ampm-label {
+        font-weight: 200;
+        font-size: 18px;
+      }
+
+      .time-slot {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }
+
+      paper-material {
+        background: white;
+      }
+
+      paper-button {
+        background-color: var(--accent-color);
+        color: var(--text-primary-color)
+      }
+
+      paper-tabs {
+        background-color: var(--light-primary-color);
+        color: var(--primary-text-color);
+        --paper-tabs-selection-bar-color: var(--accent-color);
       }
     </style>
 
     <div class="header">
       <div class="about-route">
-        <h1 style="font-weight:300; color:grey; font-size:32px;">No campus too far</h1>
+        <h1 class="about-route-header">Discovery Park Shuttle</h1>
         <p>The Discovery Park shuttle will take students all the way out to Discovery Park in <b>15 minutes</b> or less.</p>
-        <p></p>
+        <p>This route services the UNT Discovery Park on HWY 77 / N. Elm St. It picks up from the UNT campus at the GAB bus stop.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
       
-      <paper-material class="map-container">
-      <google-map latitude="37.77493" longitude="-122.41942" fit-to-markers>
-        <google-map-marker latitude="37.779" longitude="-122.3892"
-            draggable="true" title="Go Giants!"></google-map-marker>
-        <google-map-marker latitude="37.777" longitude="-122.38911"></google-map-marker>
+      <paper-material class="map-container" elevation="1">
+      <google-map latitude="33.2539457" longitude="-97.1550846" fit-to-markers  disable-default-ui>
+        <google-map-marker latitude="33.2539457" longitude="-97.1550846"></google-map-marker>
+        <google-map-marker latitude="33.2131797" longitude="-97.1503014"></google-map-marker>
       </google-map>
       </paper-material>
     </div>
 
-    <paper-material elevation="1" class="departure-card">
-      <paper-tabs>
+    <paper-material class="departure-times">
+      <paper-tabs selected="{{selected}}">
         <paper-tab>GAB</paper-tab>
         <paper-tab>Discovery Park</paper-tab>
       </paper-tabs>
-    </paper-material>
 
+
+      <iron-pages selected="{{selected}}">
+      <div class="GAB">
+        
+        <div class="mon-thur">
+          <center><h2>Monday-Thursday</h2></center>
+          <hr>
+        <table class="time-table">
+        <template is="dom-repeat" items="{{GABmt}}">
+          <tr>
+            <td><span class="ampm-label"><b>{{item.label}}</b></span></td>
+            <td class="time-slot"><span>{{item.time1}}</span></td> 
+            <td class="time-slot"><span>{{item.time2}}</span></td>
+            <td class="time-slot"><span>{{item.time3}}</span></td>
+            <td class="time-slot"><span>{{item.time4}}</span></td>
+            <td class="time-slot"><span>{{item.time5}}</span></td>              
+          </tr>    
+        </template>
+        </table>
+        </div>
+
+        <div class="fri-sat">
+        <center><h2>Friday-Saturday</h2></center>
+        <hr>
+        <table class="time-table">
+        <template is="dom-repeat" items="{{GABsf}}">
+          <tr>
+            <td><span class="ampm-label"><b>{{item.label}}</b></span></td>
+            <td class="time-slot"><span>{{item.time1}}</span></td> 
+            <td class="time-slot"><span>{{item.time2}}</span></td>
+            <td class="time-slot"><span>{{item.time3}}</span></td>
+            <td class="time-slot"><span>{{item.time4}}</span></td>
+            <td class="time-slot"><span>{{item.time5}}</span></td>              
+          </tr>    
+        </template>   
+        </table>
+        </div>        
+      </div>
+      <div class="DP">
+        <div class="mon-thur">
+          <center><h2>Monday-Thursday</h2></center>
+          <hr>
+        <table class="time-table">
+        <template is="dom-repeat" items="{{DPmt}}">
+          <tr>
+            <td><span class="ampm-label"><b>{{item.label}}</b></span></td>
+            <td class="time-slot"><span>{{item.time1}}</span></td> 
+            <td class="time-slot"><span>{{item.time2}}</span></td>
+            <td class="time-slot"><span>{{item.time3}}</span></td>
+            <td class="time-slot"><span>{{item.time4}}</span></td>
+            <td class="time-slot"><span>{{item.time5}}</span></td>              
+          </tr>    
+        </template>
+        </table>
+        </div>     
+      <div class="fri-sat">
+        <center><h2>Friday-Saturday</h2></center>
+        <hr>
+        <table class="time-table">
+        <template is="dom-repeat" items="{{DPsf}}">
+          <tr>
+            <td><span class="ampm-label"><b>{{item.label}}</b></span></td>
+            <td class="time-slot"><span>{{item.time1}}</span></td> 
+            <td class="time-slot"><span>{{item.time2}}</span></td>
+            <td class="time-slot"><span>{{item.time3}}</span></td>
+            <td class="time-slot"><span>{{item.time4}}</span></td>
+            <td class="time-slot"><span>{{item.time5}}</span></td>              
+          </tr>    
+        </template>   
+        </table>
+        </div>                   
+      </div>
+      </iron-pages>
+    </paper-material>
+    
+  
   </template>
   <script>
   (function() {
@@ -74,13 +210,92 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     Polymer({
       is: 'discovery-park',
-
-      properties: {
-        foo: {
-          type: String,
-          value: 'discovery-park',
-          notify: true
-        }
+      properties: { 
+        selected: {
+          value: 0
+        },
+        GABmt: {
+          type: Array,
+          value: function() {
+            return [
+                {label: 'am', time1: '7:15', time2:  '7:29', time3: '7:43', time4: '7:55'},
+                {time1: '8:09', time2:  '8:23', time3: '8:35', time4: '8:49'},
+                {time1: '9:03', time2:  '9:15', time3: '9:29', time4: '9:43', time5:'9:55'},
+                {time1: '10:09', time2:  '10:23', time3: '10:35', time4: '10:49'},
+                {time1: '11:03', time2:  '11:15', time3: '11:29', time4: '11:43', time5:'11:55'},
+                {label: 'pm', time1: '12:09', time2:  '12:23', time3: '12:35', time4: '12:49'},
+                {time1: '1:03', time2:  '1:15', time3: '1:29', time4: '1:43', time5:'1:55'}, 
+                {time1: '2:09', time2:  '2:23', time3: '2:35', time4: '2:49'},
+                {time1: '3:03', time2:  '3:15', time3: '3:29', time4: '3:43', time5:'3:55'},
+                {time1: '4:09', time2:  '4:23', time3: '4:35', time4: '4:49'},
+                {time1: '5:03', time2:  '5:15', time3: '5:29', time4: '5:55'},
+                {time1: '6:09', time2:  '6:29', time3: '6:49'},
+                {time1: '7:09', time2:  '7:29', time3: '7:49'},
+                {time1: '8:09', time2:  '8:29'},
+                {time1: '9:09', time2:  '9:49'},
+                {time1: '10:29'}
+              ];
+            }
+          },
+        GABsf: {
+          type: Array,
+          value: function() {
+            return [
+                {label: 'am', time1: '7:15', time2: '7:55'},
+                {time1: '8:35'},
+                {time1:  '9:15', time2:'9:55'},
+                {time1: '10:35'},
+                {time1:  '11:15',time2:'11:55'},
+                {label: 'pm', time1: '12:35'},
+                {time1:  '1:15', time2:'1:55'}, 
+                {time1: '2:35'},
+                {time1:  '3:15', time2:'3:55'},
+                {time1: '4:35'},
+                {time1:  '5:15'}                
+              ];
+            }
+          },          
+        DPmt: {
+          type: Array,
+          value: function() {
+            return [
+                {label: 'am', time1: '7:35', time2:  '7:49'},
+                {time1: '8:03', time2:  '8:15', time3: '8:29', time4: '8:43', time5:'8:55'},
+                {time1: '9:09', time2:  '9:23', time3: '9:35', time4: '9:49'},
+                {time1: '10:03', time2:  '10:15', time3: '10:29', time4: '10:43', time5:'10:55'},
+                {time1: '11:09', time2:  '11:23', time3: '11:35', time4: '11:49'},
+                {label: 'pm', time1: '12:03', time2:  '12:15', time3: '12:29', time4: '12:43', time5: '12:55'},
+                {time1: '1:09', time2:  '1:23', time3: '1:35', time4: '1:49'}, 
+                {time1: '2:03', time2:  '2:15', time3: '2:29', time4: '2:43', time5:'2:55'},
+                {time1: '3:09', time2:  '3:23', time3: '3:35', time4: '3:49'},
+                {time1: '4:03', time2:  '4:15', time3: '4:29', time4: '4:55'},
+                {time1: '5:09', time2:  '5:23', time3: '5:35', time4: '5:49'},
+                {time1: '6:09', time2:  '6:29', time3: '6:49'},
+                {time1: '7:09', time2:  '7:29', time3: '7:49'},
+                {time1: '8:09', time2:  '8:29', time3:'8:49'},
+                {time1: '9:29'},
+                {time1: '10:09'}
+              ];
+            }
+          },
+          DPsf: {
+          type: Array,
+          value: function() {
+            return [
+                {label: 'am', time1: '7:35'},
+                {time1:  '8:15', time2:'8:55'},
+                {time1:  '9:35'},
+                {time1:  '10:15', time2:'10:55' },
+                {time1:  '11:35'},
+                {label: 'pm', time1:  '12:15', time2:'12:55'},
+                {time1:  '1:35'}, 
+                {time1:  '2:15', time2:'2:55'},
+                {time1:  '3:35'},
+                {time1: '4:15', time2: '4:55'},
+                {time1: '5:35'}              
+              ];
+            }
+        }      
       }
     });
   })();
