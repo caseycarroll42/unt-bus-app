@@ -42,7 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .about-route-header {
         font-weight:300; 
-        color:var(--secondary-text-color);
+        color:var(--accent-color);
         font-size:40px;
       }
 
@@ -99,6 +99,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--primary-text-color);
         --paper-tabs-selection-bar-color: var(--accent-color);
       }
+
+      paper-tab {
+        transition: background .3s ease-out;
+      }
+
+      paper-tab:hover {
+        background: var(--accent-color);
+        color: var(--text-primary-color);
+      }         
     </style>
 
     <div class="header">

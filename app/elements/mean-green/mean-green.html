@@ -40,7 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .about-route-header {
         font-weight:300; 
-        color:var(--secondary-text-color);
+        color:var(--accent-color);
         font-size:40px;
       }
 
@@ -50,6 +50,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0px 0px 32px 0px;
         @apply(--layout-flex);
       }
+
+      .departure-times {
+        width: 100%;
+        height: 900px;
+        background: white;
+      }      
+
+      .bus-stop {
+        margin-top: 16px;
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+      }
+
+      .time-slot {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }      
+
+      paper-tabs {
+        background-color: var(--light-primary-color);
+        color: var(--primary-text-color);
+        --paper-tabs-selection-bar-color: var(--accent-color);
+      }
+
+      paper-tab {
+        transition: background .3s ease-out;
+        transition: color .3s ease-out;
+      }
+
+      paper-tab:hover {
+        background: var(--accent-color);
+        color: var(--text-primary-color);
+      }      
 
     </style>
     <div class="header">
@@ -64,12 +97,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
 
       <paper-material class="map-container" elevation="1">
-        <google-map latitude="33.2539457" longitude="-97.1550846" fit-to-markers  disable-default-ui>
-          <google-map-marker latitude="33.2539457" longitude="-97.1550846"></google-map-marker>
+        <google-map latitude="33.2131797" longitude="-97.1503014" fit-to-markers  disable-default-ui>
           <google-map-marker latitude="33.2131797" longitude="-97.1503014"></google-map-marker>
+          <google-map-marker latitude="33.208283" longitude="-97.147432"></google-map-marker>
         </google-map>
       </paper-material>
     </div>
+    <paper-material class="departure-times">
+      <paper-tabs selected="{{selected}}">
+        <paper-tab>GAB</paper-tab>
+        <paper-tab>Kerr Hall</paper-tab>
+      </paper-tabs>
+
+      <iron-pages selected="{{selected}}">
+        <div class="bus-stop" id="GAB">
+          <div class="mon-thur">
+            <center><h2>Monday-Thursday</h2></center>
+            <hr>
+          <table class="time-table">
+          <template is="dom-repeat" items="{{GAB}}">
+            <tr>
+              <td><span class="ampm-label"><b>{{item.label}}</b></span></td>
+              <td class="time-slot"><span>{{item.time1}}</span></td> 
+              <td class="time-slot"><span>{{item.time2}}</span></td>
+              <td class="time-slot"><span>{{item.time3}}</span></td>
+              <td class="time-slot"><span>{{item.time4}}</span></td>
+              <td class="time-slot"><span>{{item.time5}}</span></td>
+              <td class="time-slot"><span>{{item.time6}}</span></td>
+              <td class="time-slot"><span>{{item.time7}}</span></td>              
+            </tr>    
+          </template>
+          </table>
+          </div>          
+        </div>
+        <div class="bus-stop" id="KERR">
+          <center><h2>Nothing here yet...</h2></center>
+        </div>
+      </iron-pages>
+    </paper-material>
   </template>
   <script>
   (function() {
@@ -79,11 +144,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'mean-green',
 
       properties: {
-        foo: {
-          type: String,
-          value: 'mean-green',
-          notify: true
-        }
+        selected: {
+          value: 0 
+        },
+        GAB: {
+          type: Array,
+          value: function() {
+            return [
+              {label: 'am', time1:'7:31', time2:'7:40', time3:'7:49', time4:'7:58'},
+              {time1:'8:07', time2:'8:16', time3:'8:25', time4:'8:34', time5: '8:43', time6: '8:52'},
+              {time1: '9:01', time2: '9:10', time3: '9:19', time4: '9:28', time5: '9:37', time6: '9:46', time7: '9:55'},
+              {time1: '10:04', time2: '10:13', time3: '10:22', time4: '10:31', time5: '10:40', time6: '10:49', time7: '10:58'},
+              {time1: '11:07', time2: '11:16', time3: '11:25', time4: '11:34', time5: '11:43', time6: '11:52'},
+
+              {label: 'pm', time1:'12:01', time2: '12:10', time3: '12:19', time4: '12:28', time5: '12:37', time6: '12:46', time7: '12:55' },
+              {time1: '1:04', time2: '1:13', time3: '1:22', time4: '1:31', time5: '1:40', time6: '1:49', time7: '1:58'},
+              {time1: '2:07', time2: '2:16', time3: '2:25', time4: '2:34', time5: '2:43', time6: '2:52'}, 
+              {time1: '3:01', time2: '3:10', time3: '3:19', time4: '3:28', time5: '3:37', time6: '3:46', time7: '3:55'},
+              {time1: '4:04', time2: '4:13', time3: '4:22', time4: '4:31', time5: '4:40', time6: '4:49', time7: '4:58'},
+              {time1: '5:07', time2: '5:16', time3: '5:25'}
+            ];
+          }
+        } 
       }
     });
   })();
