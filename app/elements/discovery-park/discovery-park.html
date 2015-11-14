@@ -20,6 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 
 <link rel="import" href="components/neon-animation/animations/scale-up-animation.html">
 <link rel="import" href="components/neon-animation/animations/fade-out-animation.html">
@@ -42,11 +43,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .about-route-header {
         font-weight:300; 
-        color:var(--secondary-text-color);
+        color:var(--accent-color);
         font-size:40px;
       }
 
       .map-container {
+        pointer-events: none;
         width: 500px;
         height: 500px;
         margin: 0px 0px 32px 0px;
@@ -56,16 +58,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .departure-times {
         width: 100%;
         height: 900px;
-
       }
 
-      .GAB {
-        margin-top: 16px;
-        @apply(--layout-horizontal);
-        @apply(--layout-around-justified);
-      }
-
-      .DP {
+      .bus-stop {
         margin-top: 16px;
         @apply(--layout-horizontal);
         @apply(--layout-around-justified);
@@ -86,6 +81,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       paper-material {
+        border-radius: 2px;
+        height: 100%;
+        width: calc(98.66% - 16px);
+        margin: 16px auto;
         background: white;
       }
 
@@ -94,11 +93,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--text-primary-color)
       }
 
+      paper-toolbar {
+        background-color: var(--light-primary-color);
+        color: var(--primary-text-color);
+      }
+
       paper-tabs {
         background-color: var(--light-primary-color);
         color: var(--primary-text-color);
         --paper-tabs-selection-bar-color: var(--accent-color);
       }
+
+      paper-tab {
+        transition: background .3s ease-out;
+      }
+
+      paper-tab:hover {
+        background: var(--accent-color);
+        color: var(--text-primary-color);
+      }
+
+      @media (max-width: 600px) {
+
+        .about-route {
+          margin: 0px auto 0px 16px;
+        }
+
+        .map-container {
+          display: none;
+        }
+
+        .bus-stop {
+          @apply(--layout-vertical);
+        }
+        .time-table {
+          margin: 0 auto;
+        }
+        .time-slot {
+          text-align: center;
+        }
+      }         
     </style>
 
     <div class="header">
@@ -110,7 +144,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <br>
         <br>
         <br>
-        <br>
+        <br>        
       </div>
       
       <paper-material class="map-container" elevation="1">
@@ -122,14 +156,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
 
     <paper-material class="departure-times">
-      <paper-tabs selected="{{selected}}">
-        <paper-tab>GAB</paper-tab>
-        <paper-tab>Discovery Park</paper-tab>
-      </paper-tabs>
+      
+      <paper-toolbar class="medium-tall">
+        <div class="title">Bus Stops</div>
+        <paper-tabs class="bottom fit" selected="{{selected}}">
+          <paper-tab>GAB</paper-tab>
+          <paper-tab>Discovery Park</paper-tab>
+        </paper-tabs>
+      </paper-toolbar>
 
 
       <iron-pages selected="{{selected}}">
-      <div class="GAB">
+      <div class="bus-stop" id="GAB">
         
         <div class="mon-thur">
           <center><h2>Monday-Thursday</h2></center>
@@ -165,7 +203,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </table>
         </div>        
       </div>
-      <div class="DP">
+      <div class="bus-stop" id="DP">
         <div class="mon-thur">
           <center><h2>Monday-Thursday</h2></center>
           <hr>

@@ -1,0 +1,192 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/google-map/google-map-marker.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+
+<dom-module id="mean-green">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .header {
+        @apply(--layout-horizontal);
+      }
+
+      .about-route {
+        padding: 0px 64px 0px 16px;
+        @apply(--layout-flex);
+      }
+
+      .about-route-header {
+        font-weight:300; 
+        color:var(--accent-color);
+        font-size:40px;
+      }
+
+      .map-container {
+        pointer-events: none;
+        width: 500px;
+        height: 500px;
+        margin: 0px 0px 32px 0px;
+        @apply(--layout-flex);
+      }
+
+      .departure-times {
+        width: 100%;
+        height: 900px;
+        background: white;
+      }      
+
+      .bus-stop {
+        margin-top: 16px;
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+      }
+
+      .time-slot {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }      
+
+      paper-toolbar {
+        background-color: var(--light-primary-color);
+        color: var(--primary-text-color);
+      }
+
+      paper-tabs {
+        
+        --paper-tabs-selection-bar-color: var(--accent-color);
+      }
+
+      paper-tab {
+        transition: background .3s ease-out;
+        transition: color .3s ease-out;
+      }
+
+      paper-tab:hover {
+        background: var(--accent-color);
+        color: var(--text-primary-color);
+      }      
+      
+      @media (max-width: 600px) {
+
+        .about-route {
+          margin: 0px auto 0px 16px;
+        }
+
+        .map-container {
+          display: none;
+        }
+      }
+    </style>
+    <div class="header">
+      <div class="about-route">
+        <h1 class="about-route-header">Mean Green Shuttle</h1>
+        <p>The Mean Green route serves as our signature circulator route. It provides easy and quick access to most points around campus, including the Fouts Field, residence halls, Rec Center, and academic buildings.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
+
+      <paper-material class="map-container" elevation="1">
+        <google-map latitude="33.2131797" longitude="-97.1503014" fit-to-markers  disable-default-ui>
+          <google-map-marker latitude="33.2131797" longitude="-97.1503014"></google-map-marker>
+          <google-map-marker latitude="33.208283" longitude="-97.147432"></google-map-marker>
+        </google-map>
+      </paper-material>
+    </div>
+    <paper-material class="departure-times">
+      <paper-toolbar class="medium-tall">
+        <div class="title">Bus Stops</div>
+        <paper-tabs class="bottom fit" selected="{{selected}}">
+          <paper-tab>GAB</paper-tab>
+          <paper-tab>Kerr Hall</paper-tab>
+        </paper-tabs>
+      </paper-toolbar>
+
+      <iron-pages selected="{{selected}}">
+        <div class="bus-stop" id="GAB">
+          <div class="mon-thur">
+            <center><h2>Monday-Thursday</h2></center>
+            <hr>
+          <table class="time-table">
+          <template is="dom-repeat" items="{{GAB}}">
+            <tr>
+              <td><span class="ampm-label"><b>{{item.label}}</b></span></td>
+              <td class="time-slot"><span>{{item.time1}}</span></td> 
+              <td class="time-slot"><span>{{item.time2}}</span></td>
+              <td class="time-slot"><span>{{item.time3}}</span></td>
+              <td class="time-slot"><span>{{item.time4}}</span></td>
+              <td class="time-slot"><span>{{item.time5}}</span></td>
+              <td class="time-slot"><span>{{item.time6}}</span></td>
+              <td class="time-slot"><span>{{item.time7}}</span></td>              
+            </tr>    
+          </template>
+          </table>
+          </div>          
+        </div>
+        <div class="bus-stop" id="KERR">
+          <center><h2>Nothing here yet...</h2></center>
+        </div>
+      </iron-pages>
+    </paper-material>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'mean-green',
+
+      properties: {
+        selected: {
+          value: 0 
+        },
+        GAB: {
+          type: Array,
+          value: function() {
+            return [
+              {label: 'am', time1:'7:31', time2:'7:40', time3:'7:49', time4:'7:58'},
+              {time1:'8:07', time2:'8:16', time3:'8:25', time4:'8:34', time5: '8:43', time6: '8:52'},
+              {time1: '9:01', time2: '9:10', time3: '9:19', time4: '9:28', time5: '9:37', time6: '9:46', time7: '9:55'},
+              {time1: '10:04', time2: '10:13', time3: '10:22', time4: '10:31', time5: '10:40', time6: '10:49', time7: '10:58'},
+              {time1: '11:07', time2: '11:16', time3: '11:25', time4: '11:34', time5: '11:43', time6: '11:52'},
+
+              {label: 'pm', time1:'12:01', time2: '12:10', time3: '12:19', time4: '12:28', time5: '12:37', time6: '12:46', time7: '12:55' },
+              {time1: '1:04', time2: '1:13', time3: '1:22', time4: '1:31', time5: '1:40', time6: '1:49', time7: '1:58'},
+              {time1: '2:07', time2: '2:16', time3: '2:25', time4: '2:34', time5: '2:43', time6: '2:52'}, 
+              {time1: '3:01', time2: '3:10', time3: '3:19', time4: '3:28', time5: '3:37', time6: '3:46', time7: '3:55'},
+              {time1: '4:04', time2: '4:13', time3: '4:22', time4: '4:31', time5: '4:40', time6: '4:49', time7: '4:58'},
+              {time1: '5:07', time2: '5:16', time3: '5:25'}
+            ];
+          }
+        } 
+      }
+    });
+  })();
+  </script>
+</dom-module>

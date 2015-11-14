@@ -75,19 +75,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Drawer Content -->
         <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
           <a data-route="discovery-park" href="/" on-click="onDataRouteClick">
-            <iron-icon icon="hardware:laptop-mac"></iron-icon>
             <span>Discovery Park</span>
           </a>
 
-          <a data-route="mean" href="/mean-green" on-click="onDataRouteClick">
-            <iron-icon icon="info"></iron-icon>
+          <a data-route="mean-green" href="/mean-green" on-click="onDataRouteClick">
             <span>Mean Green</span>
           </a>
 
-          <a data-route="north-texan" href="/north-texan" on-click="onDataRouteClick">
-            <iron-icon icon="mail"></iron-icon>
+<!--           <a data-route="north-texan" href="/north-texan" on-click="onDataRouteClick">
             <span>North Texan</span>
-          </a>
+          </a> -->
         </paper-menu>
       </paper-scroll-header-panel>
 
@@ -120,11 +117,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </section>
 
             <section data-route="mean-green">
-              <paper-material elevation="1">
-                <h2 class="page-title">Users</h2>
-                <p>This is the users section</p>
-                <a href="/mean-green/Rob">Rob</a>
-              </paper-material>
+              <mean-green></mean-green>
             </section>
 
 <!--             <section data-route="user-info">
