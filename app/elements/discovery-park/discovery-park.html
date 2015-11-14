@@ -56,16 +56,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .departure-times {
         width: 100%;
         height: 900px;
-
       }
 
-      .GAB {
-        margin-top: 16px;
-        @apply(--layout-horizontal);
-        @apply(--layout-around-justified);
-      }
-
-      .DP {
+      .bus-stop {
         margin-top: 16px;
         @apply(--layout-horizontal);
         @apply(--layout-around-justified);
@@ -86,6 +79,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       paper-material {
+        border-radius: 2px;
+        height: 100%;
+        width: calc(98.66% - 16px);
+        margin: 16px auto;
         background: white;
       }
 
@@ -107,6 +104,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       paper-tab:hover {
         background: var(--accent-color);
         color: var(--text-primary-color);
+      }
+
+      @media (max-width: 600px) {
+
+        .about-route {
+          margin: 0px auto 0px 16px;
+        }
+
+        .map-container {
+          display: none;
+        }
+
+        .bus-stop {
+          @apply(--layout-vertical);
+        }
+        .time-table {
+          margin: 0 auto;
+        }
+        .time-slot {
+          text-align: center;
+        }
       }         
     </style>
 
@@ -119,7 +137,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <br>
         <br>
         <br>
-        <br>
+        <br>        
       </div>
       
       <paper-material class="map-container" elevation="1">
@@ -138,7 +156,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
       <iron-pages selected="{{selected}}">
-      <div class="GAB">
+      <div class="bus-stop" id="GAB">
         
         <div class="mon-thur">
           <center><h2>Monday-Thursday</h2></center>
@@ -174,7 +192,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </table>
         </div>        
       </div>
-      <div class="DP">
+      <div class="bus-stop" id="DP">
         <div class="mon-thur">
           <center><h2>Monday-Thursday</h2></center>
           <hr>
