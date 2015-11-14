@@ -21,6 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 
 <dom-module id="mean-green">
   <template>
@@ -45,6 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .map-container {
+        pointer-events: none;
         width: 500px;
         height: 500px;
         margin: 0px 0px 32px 0px;
@@ -68,9 +70,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-size: 16px;
       }      
 
-      paper-tabs {
+      paper-toolbar {
         background-color: var(--light-primary-color);
         color: var(--primary-text-color);
+      }
+
+      paper-tabs {
+        
         --paper-tabs-selection-bar-color: var(--accent-color);
       }
 
@@ -114,10 +120,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-material>
     </div>
     <paper-material class="departure-times">
-      <paper-tabs selected="{{selected}}">
-        <paper-tab>GAB</paper-tab>
-        <paper-tab>Kerr Hall</paper-tab>
-      </paper-tabs>
+      <paper-toolbar class="medium-tall">
+        <div class="title">Bus Stops</div>
+        <paper-tabs class="bottom fit" selected="{{selected}}">
+          <paper-tab>GAB</paper-tab>
+          <paper-tab>Kerr Hall</paper-tab>
+        </paper-tabs>
+      </paper-toolbar>
 
       <iron-pages selected="{{selected}}">
         <div class="bus-stop" id="GAB">
