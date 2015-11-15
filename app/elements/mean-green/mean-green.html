@@ -46,7 +46,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .map-container {
-        pointer-events: none;
         width: 500px;
         height: 500px;
         margin: 0px 0px 32px 0px;
@@ -75,8 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--primary-text-color);
       }
 
-      paper-tabs {
-        
+      paper-tabs {        
         --paper-tabs-selection-bar-color: var(--accent-color);
       }
 
@@ -86,8 +84,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       paper-tab:hover {
-        background: var(--accent-color);
-        color: var(--text-primary-color);
+        /*background: var(--accent-color);*/
+        color: var(--accent-color);
       }      
       
       @media (max-width: 600px) {
@@ -113,9 +111,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
 
       <paper-material class="map-container" elevation="1">
-        <google-map latitude="33.2131797" longitude="-97.1503014" fit-to-markers  disable-default-ui>
+        <google-map latitude="33.2131797" longitude="-97.1503014" fit-to-markers  
+          disable-default-ui disable-zoom>
           <google-map-marker latitude="33.2131797" longitude="-97.1503014"></google-map-marker>
           <google-map-marker latitude="33.208283" longitude="-97.147432"></google-map-marker>
+          <google-map-point latitude="33.2079905" longitude="-97.1499984"></google-map-point>
         </google-map>
       </paper-material>
     </div>
@@ -150,7 +150,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </div>          
         </div>
         <div class="bus-stop" id="KERR">
-          <center><h2>Nothing here yet...</h2></center>
+          <div class="mon-thur">
+            <center><h2>Monday-Thursday</h2></center>
+            <hr>
+          <!-- grab data from json file -->
+          <iron-ajax auto 
+            url="../../data/meangreen/kerrhall.json" 
+            handle-as="json" 
+            last-response="{{data}}">
+          </iron-ajax>
+          
+          <!-- iterate over data -->
+          <table>
+          <template is="dom-repeat" items="{{data}}">
+            <tr>
+              <td><span class="ampm-label"><b>{{item.label}}</b></span></td>
+              <td class="time-slot"><span>{{item.time1}}</span></td> 
+              <td class="time-slot"><span>{{item.time2}}</span></td>
+              <td class="time-slot"><span>{{item.time3}}</span></td>
+              <td class="time-slot"><span>{{item.time4}}</span></td>
+              <td class="time-slot"><span>{{item.time5}}</span></td>
+              <td class="time-slot"><span>{{item.time6}}</span></td>
+              <td class="time-slot"><span>{{item.time7}}</span></td> 
+            </tr>
+          </template>
+          </table>
+          </div>
         </div>
       </iron-pages>
     </paper-material>

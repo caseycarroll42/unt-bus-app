@@ -47,8 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-size:40px;
       }
 
-      .map-container {
-        pointer-events: none;
+      .map-container {        
         width: 500px;
         height: 500px;
         margin: 0px 0px 32px 0px;
@@ -98,20 +97,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--primary-text-color);
       }
 
-      paper-tabs {
-        background-color: var(--light-primary-color);
-        color: var(--primary-text-color);
+      paper-tabs {        
         --paper-tabs-selection-bar-color: var(--accent-color);
       }
 
       paper-tab {
-        transition: background .3s ease-out;
+        transition: color .3s ease-out;
       }
 
       paper-tab:hover {
-        background: var(--accent-color);
-        color: var(--text-primary-color);
-      }
+        /*background: var(--accent-color);*/
+        color: var(--accent-color);
+      }  
 
       @media (max-width: 600px) {
 
@@ -148,7 +145,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
       
       <paper-material class="map-container" elevation="1">
-      <google-map latitude="33.2539457" longitude="-97.1550846" fit-to-markers  disable-default-ui>
+      <google-map latitude="33.2539457" longitude="-97.1550846" fit-to-markers  disable-default-ui disable-zoom>
         <google-map-marker latitude="33.2539457" longitude="-97.1550846"></google-map-marker>
         <google-map-marker latitude="33.2131797" longitude="-97.1503014"></google-map-marker>
       </google-map>
