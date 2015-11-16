@@ -142,6 +142,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <br>
         <br>
         <br>        
+        <paper-button raised on-tap="showPDF">See route PDF</paper-button>
       </div>
       
       <paper-material class="map-container" elevation="1">
@@ -331,6 +332,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               ];
             }
         }      
+      }, 
+      showPDF: function() {
+        var win = window.open('http://www.unt.edu/transit/routes/discoveryparkDetour.pdf', '_blank');
+        win.focus();
       }
     });
   })();
