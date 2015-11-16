@@ -48,8 +48,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .map-container {        
-        width: 500px;
-        height: 500px;
+        width: 350px;
+        height: 350px;
         margin: 0px 0px 32px 0px;
         @apply(--layout-flex);
       }
@@ -140,13 +140,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <br>
         <br>
         <br>
-        <br>
-        <br>        
+        <br>      
         <paper-button raised on-tap="showPDF">See route PDF</paper-button>
       </div>
       
       <paper-material class="map-container" elevation="1">
-      <google-map latitude="33.2539457" longitude="-97.1550846" fit-to-markers  disable-default-ui disable-zoom>
+      <google-map  fit-to-markers  disable-default-ui disable-zoom>
         <google-map-marker latitude="33.2539457" longitude="-97.1550846"></google-map-marker>
         <google-map-marker latitude="33.2131797" longitude="-97.1503014"></google-map-marker>
       </google-map>
