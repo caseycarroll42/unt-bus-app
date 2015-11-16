@@ -67,7 +67,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .time-slot {
         padding: 10px 10px 10px 10px;
         font-size: 16px;
-      }      
+      }
+
+      paper-button {
+        background: var(--accent-color);
+        color: white;
+      }     
 
       paper-toolbar {
         background-color: var(--light-primary-color);
@@ -108,6 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <br>
         <br>
         <br>
+        <paper-button raised on-tap="showPDF">See route PDF</paper-button>
       </div>
 
       <paper-material class="map-container" elevation="1">
@@ -193,6 +199,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         selected: {
           value: 0 
         }
+      },
+
+      showPDF: function() {
+        var win = window.open('http://www.unt.edu/transit/routes/meangreen.pdf', '_blank');
+        win.focus();
       }
     });
   })();
