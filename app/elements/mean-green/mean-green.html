@@ -22,6 +22,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
 
 <dom-module id="mean-green">
   <template>
@@ -91,7 +94,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       paper-tab:hover {
         /*background: var(--accent-color);*/
         color: var(--accent-color);
-      }      
+      }
+
+      iron-icon {
+        transition: color .3s ease-out;
+      }
+
+      iron-icon:hover {                
+        color: var(--accent-color);
+      }    
       
       @media (max-width: 600px) {
 
@@ -112,8 +123,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <br>
         <br>
         <br>
-        <br>
         <paper-button raised on-tap="showPDF">See route PDF</paper-button>
+        <br>
       </div>
 
       <paper-material class="map-container" elevation="1">
@@ -128,6 +139,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <paper-material class="departure-times">
       <paper-toolbar class="medium-tall">
         <div class="title">Bus Stops</div>
+
+        <span class="flex"></span>
+        
+        <div on-tap="openStreetView">
+          <iron-icon icon="maps:place"></iron-icon>
+          <paper-tooltip position="left">View street view of bus stop</paper-tooltip>
+          <paper-ripple></paper-ripple>
+        </div>
+
         <paper-tabs class="bottom fit" selected="{{selected}}">
           <paper-tab>GAB</paper-tab>
           <paper-tab>Kerr Hall</paper-tab>
@@ -204,6 +224,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       showPDF: function() {
         var win = window.open('http://www.unt.edu/transit/routes/meangreen.pdf', '_blank');
         win.focus();
+      },
+      openStreetView: function() {
+        if (this.selected == 0) {
+          //launch GAB
+          var win = window.open("https://www.google.com/maps/@33.2139412,-97.1484269,3a,75y,49.31h,71.58t/data=!3m6!1e1!3m4!1szpvcO81VsE-N8PztnCOXRg!2e0!7i13312!8i6656");
+          win.focus();
+        } else {
+          //launch KERR
+          var win = window.open("https://www.google.com/maps/place/Kerr+Hall,+Denton,+TX+76201/@33.2082246,-97.1472269,3a,75y,199.93h,90.15t/data=!3m7!1e1!3m5!1sZetXCWaNFbL0qZNkiBBDWg!2e0!6s%2F%2Fgeo1.ggpht.com%2Fcbk%3Fpanoid%3DZetXCWaNFbL0qZNkiBBDWg%26output%3Dthumbnail%26cb_client%3Dmaps_sv.tactile.gps%26thumb%3D2%26w%3D203%26h%3D100%26yaw%3D329.80127%26pitch%3D0!7i13312!8i6656!4m2!3m1!1s0x864dca432661e86f:0x91e8c2d1211b6b18");
+          win.focus();
+        }
       }
     });
   })();
