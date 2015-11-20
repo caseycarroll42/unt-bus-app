@@ -26,13 +26,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
 
-<dom-module id="mean-green">
+<dom-module id="eagle-point">
   <template>
     <style>
       :host {
         display: block;
       }
-
       .header {
         @apply(--layout-horizontal);
       }
@@ -117,8 +116,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <div class="header">
       <div class="about-route">
-        <h1 class="about-route-header">Mean Green Shuttle</h1>
-        <p>The Mean Green route serves as our signature circulator route. It provides easy and quick access to most points around campus, including the Fouts Field, residence halls, Rec Center, and academic buildings.</p>
+        <h1 class="about-route-header">Eagle Point</h1>
+        <p>This route serves as a connecter route between Victory Hall and the main campus.</p>
         <br>
         <br>
         <br>
@@ -130,9 +129,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-material class="map-container" elevation="1">
         <google-map latitude="33.2131797" longitude="-97.1503014" fit-to-markers  
           disable-default-ui disable-zoom>
-          <google-map-marker latitude="33.2131797" longitude="-97.1503014"></google-map-marker>
           <google-map-marker latitude="33.208283" longitude="-97.147432"></google-map-marker>
-          <google-map-point latitude="33.2079905" longitude="-97.1499984"></google-map-point>
+          <google-map-marker latitude="33.2023187" longitude="-97.1602165"></google-map-marker>
         </google-map>
       </paper-material>
     </div>
@@ -157,25 +155,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <iron-pages selected="{{selected}}">
         <div class="bus-stop" id="GAB">
           <div class="mon-thur">
-            <center><h2>Monday-Thursday</h2></center>
+            <center><h2>Monday-Friday</h2></center>
             <hr>
-          <iron-ajax auto url="../../data/meangreen.json"
+          <iron-ajax auto url="../../data/eaglepoint.json"
             handle-as="json"
             last-response="{{stops}}">
           </iron-ajax>
           
           <template is="dom-repeat" items="{{stops}}" as="stop">
           <table class="time-table">
-            <template is="dom-repeat" items="{{stop.GAB}}" as="GAB">
+            <template is="dom-repeat" items="{{stop.VICT}}" as="VICT">
             <tr>
-              <td><span class="ampm-label"><b>{{GAB.label}}</b></span></td>
-              <td class="time-slot"><span>{{GAB.time1}}</span></td> 
-              <td class="time-slot"><span>{{GAB.time2}}</span></td>
-              <td class="time-slot"><span>{{GAB.time3}}</span></td>
-              <td class="time-slot"><span>{{GAB.time4}}</span></td>
-              <td class="time-slot"><span>{{GAB.time5}}</span></td>
-              <td class="time-slot"><span>{{GAB.time6}}</span></td>
-              <td class="time-slot"><span>{{GAB.time7}}</span></td>              
+              <td><span class="ampm-label"><b>{{VICT.label}}</b></span></td>
+              <td class="time-slot"><span>{{VICT.time1}}</span></td> 
+              <td class="time-slot"><span>{{VICT.time2}}</span></td>
+              <td class="time-slot"><span>{{VICT.time3}}</span></td>
+              <td class="time-slot"><span>{{VICT.time4}}</span></td>
+              <td class="time-slot"><span>{{VICT.time5}}</span></td>
+              <td class="time-slot"><span>{{VICT.time6}}</span></td>
+              <td class="time-slot"><span>{{VICT.time7}}</span></td>              
             </tr>
             </template>    
           </template>
@@ -184,7 +182,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <div class="bus-stop" id="KERR">
           <div class="mon-thur">
-            <center><h2>Monday-Thursday</h2></center>
+            <center><h2>Monday-Friday</h2></center>
             <hr>
           <template is="dom-repeat" items="{{stops}}" as="stop">
           <!-- iterate over data -->
@@ -213,27 +211,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     'use strict';
 
     Polymer({
-      is: 'mean-green',
+      is: 'eagle-point',
 
       properties: {
         selected: {
-          value: 0 
-        }
-      },
-
-      showPDF: function() {
-        var win = window.open('http://www.unt.edu/transit/routes/meangreen.pdf', '_blank');
-        win.focus();
-      },
-      openStreetView: function() {
-        if (this.selected === 0) {
-          //launch GAB
-          var win = window.open("https://www.google.com/maps/@33.2139412,-97.1484269,3a,75y,49.31h,71.58t/data=!3m6!1e1!3m4!1szpvcO81VsE-N8PztnCOXRg!2e0!7i13312!8i6656");
-          win.focus();
-        } else {
-          //launch KERR
-          var win = window.open("https://www.google.com/maps/place/Kerr+Hall,+Denton,+TX+76201/@33.2082246,-97.1472269,3a,75y,199.93h,90.15t/data=!3m7!1e1!3m5!1sZetXCWaNFbL0qZNkiBBDWg!2e0!6s%2F%2Fgeo1.ggpht.com%2Fcbk%3Fpanoid%3DZetXCWaNFbL0qZNkiBBDWg%26output%3Dthumbnail%26cb_client%3Dmaps_sv.tactile.gps%26thumb%3D2%26w%3D203%26h%3D100%26yaw%3D329.80127%26pitch%3D0!7i13312!8i6656!4m2!3m1!1s0x864dca432661e86f:0x91e8c2d1211b6b18");
-          win.focus();
+          type: Number,
+          value: 0,
+          notify: true
         }
       }
     });
