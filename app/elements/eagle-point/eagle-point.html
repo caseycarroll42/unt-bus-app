@@ -147,7 +147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
 
         <paper-tabs class="bottom fit" selected="{{selected}}">
-          <paper-tab>GAB</paper-tab>
+          <paper-tab>Victory Hall</paper-tab>
           <paper-tab>Kerr Hall</paper-tab>
         </paper-tabs>
       </paper-toolbar>
@@ -244,15 +244,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   {'time1':'5:05', 'time2':'5:14', 'time3':'5:23', 'time4':'5:32'}
             ];
           }
-        },
+        }
+      },
         openStreetView: function() {
           var win;
           if (this.selected === 1) {
             win = window.open('https://www.google.com/maps/place/Kerr+Hall,+Denton,+TX+76201/@33.2082246,-97.1472269,3a,75y,199.93h,90.15t/data=!3m7!1e1!3m5!1sZetXCWaNFbL0qZNkiBBDWg!2e0!6s%2F%2Fgeo1.ggpht.com%2Fcbk%3Fpanoid%3DZetXCWaNFbL0qZNkiBBDWg%26output%3Dthumbnail%26cb_client%3Dmaps_sv.tactile.gps%26thumb%3D2%26w%3D203%26h%3D100%26yaw%3D329.80127%26pitch%3D0!7i13312!8i6656!4m2!3m1!1s0x864dca432661e86f:0x91e8c2d1211b6b18');
             win.focus();
           }
-        }
-      }
+        },
+        showPDF: function() {          
+          var win = window.open('http://www.unt.edu/transit/routes/eaglepoint.pdf', '_blank');
+          win.focus();
+        }      
     });
   })();
   </script>
