@@ -34,6 +34,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       .header {
         @apply(--layout-horizontal);
+        position: relative;
       }
 
       .about-route {
@@ -74,6 +75,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       paper-button {
         background: var(--accent-color);
         color: white;
+        position: absolute;
+        bottom: 36px;
       }     
 
       paper-toolbar {
@@ -117,11 +120,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="header">
       <div class="about-route">
         <h1 class="about-route-header">Eagle Point</h1>
-        <p>This route serves as a connecter route between Victory Hall and the main campus.</p>
-        <br>
-        <br>
-        <br>
-        <br>
+        <p>This route serves as a connecter route between Victory Hall and the main campus.</p> 
         <paper-button raised on-tap="showPDF">See route PDF</paper-button>
         <br>
       </div>

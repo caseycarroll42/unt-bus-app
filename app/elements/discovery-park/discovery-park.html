@@ -36,6 +36,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .header {
         @apply(--layout-horizontal);
+        position: relative;
       }
 
       .about-route {
@@ -92,7 +93,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       paper-button {
         background-color: var(--accent-color);
-        color: var(--text-primary-color)
+        color: var(--text-primary-color);
+        position: absolute;
+        bottom: 20px;
       }
 
       paper-toolbar {
@@ -148,10 +151,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <h1 class="about-route-header">Discovery Park Shuttle</h1>
         <p>The Discovery Park shuttle will take students all the way out to Discovery Park in <b>15 minutes</b> or less.</p>
         <p>This route services the UNT Discovery Park on HWY 77 / N. Elm St. It picks up from the UNT campus at the GAB bus stop.</p>
-        <br>
-        <br>
-        <br>
-        <br>      
+     
         <paper-button raised on-tap="showPDF">See route PDF</paper-button>
       </div>
       
