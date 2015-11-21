@@ -156,15 +156,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="bus-stop" id="GAB">
           <div class="mon-thur">
             <center><h2>Monday-Friday</h2></center>
-            <hr>
-          <iron-ajax auto url="eaglepoint.json"
-            handle-as="json"
-            last-response="{{stops}}">
-          </iron-ajax>
-          
-          <template is="dom-repeat" items="{{stops}}" as="stop">
-          <table class="time-table">
-            <template is="dom-repeat" items="{{stop.VICT}}" as="VICT">
+            <hr>          
+            <table class="time-table">
+            <template is="dom-repeat" items="{{VICT}}" as="VICT">
             <tr>
               <td><span class="ampm-label"><b>{{VICT.label}}</b></span></td>
               <td class="time-slot"><span>{{VICT.time1}}</span></td> 
@@ -176,7 +170,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <td class="time-slot"><span>{{VICT.time7}}</span></td>              
             </tr>
             </template>    
-          </template>
           </table>
           </div>          
         </div>
@@ -184,21 +177,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div class="mon-thur">
             <center><h2>Monday-Friday</h2></center>
             <hr>
-          <template is="dom-repeat" items="{{stops}}" as="stop">
-          <!-- iterate over data -->
-          <table>
-          <template is="dom-repeat" items="{{stop.KERR}}" as="KERR">
-            <tr>
-              <td><span class="ampm-label"><b>{{KERR.label}}</b></span></td>
-              <td class="time-slot"><span>{{KERR.time1}}</span></td> 
-              <td class="time-slot"><span>{{KERR.time2}}</span></td>
-              <td class="time-slot"><span>{{KERR.time3}}</span></td>
-              <td class="time-slot"><span>{{KERR.time4}}</span></td>
-              <td class="time-slot"><span>{{KERR.time5}}</span></td>
-              <td class="time-slot"><span>{{KERR.time6}}</span></td>
-              <td class="time-slot"><span>{{KERR.time7}}</span></td> 
-            </tr>
-          </template>
+            <table>
+            <template is="dom-repeat" items="{{KERR}}" as="KERR">
+              <tr>
+                <td><span class="ampm-label"><b>{{KERR.label}}</b></span></td>
+                <td class="time-slot"><span>{{KERR.time1}}</span></td> 
+                <td class="time-slot"><span>{{KERR.time2}}</span></td>
+                <td class="time-slot"><span>{{KERR.time3}}</span></td>
+                <td class="time-slot"><span>{{KERR.time4}}</span></td>
+                <td class="time-slot"><span>{{KERR.time5}}</span></td>
+                <td class="time-slot"><span>{{KERR.time6}}</span></td>
+                <td class="time-slot"><span>{{KERR.time7}}</span></td> 
+              </tr>
           </template>
           </table>
           </div>
@@ -218,6 +208,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Number,
           value: 0,
           notify: true
+        },
+        VICT: {
+          type: Array,
+          value: function() {
+            return [
+            {'label':'am', 'time1':'7:15','time2':'7:24','time3':'7:33', 'time4':'7:42','time5':'7:51'},
+            {'time1':'8:00','time2':'8:09','time3':'8:18', 'time4':'8:27','time5':'8:36', 'time6':'8:45', 'time7':'8:54'},
+            {'time1':'9:03','time2':'9:12','time3':'9:21', 'time4':'9:30','time5':'9:39', 'time6':'9:48', 'time7':'9:57'},      
+            {'time1':'10:06','time2':'10:15','time3':'10:24', 'time4':'10:33','time5':'10:42', 'time6':'10:51'},
+            {'time1':'11:00','time2':'11:09','time3':'11:18', 'time4':'11:27','time5':'11:36', 'time6':'11:45', 'time7':'11:54'},
+            {'label':'pm', 'time1':'12:03','time2':'12:12','time3':'12:21', 'time4':'12:30','time5':'12:312', 'time6':'12:48', 'time7':'12:57'},
+            {'time1':'1:06','time2':'1:15','time3':'1:24', 'time4':'1:33','time5':'1:42', 'time6':'1:51'},
+            {'time1':'2:00','time2':'2:09','time3':'2:18', 'time4':'2:27','time5':'2:36', 'time6':'2:45', 'time7':'2:54'},
+            {'time1':'3:03','time2':'3:12','time3':'3:21', 'time4':'3:30','time5':'3:33', 'time6':'3:48', 'time7':'3:57'},      
+            {'time1':'4:06','time2':'4:15','time3':'4:24', 'time4':'4:33','time5':'4:42', 'time6':'4:51'},
+            {'time1':'5:00','time2':'5:09','time3':'5:18', 'time4':'5:27'}
+            ];
+          }
+        },
+        KERR: {
+          type: Array,
+          value: function() {
+            return [
+                  {'label':'am', 'time1':'7:29', 'time2':'7:38', 'time3':'7:47', 'time4':'7:56'},
+                  {'time1':'8:05', 'time2':'8:14', 'time3':'8:23', 'time4':'8:32', 'time5':'8:41', 'time6':'8:50', 'time7':'8:59'},
+                  {'time1':'9:08', 'time2':'9:17', 'time3':'9:26', 'time4':'9:35', 'time5':'9:44', 'time6':'9:53'},
+                  {'time1':'10:02', 'time2':'10:11', 'time3':'10:20', 'time4':'10:29', 'time5':'10:38', 'time6':'10:47', 'time7':'10:56'},
+                  {'time1':'11:05', 'time2':'11:14', 'time3':'11:23', 'time4':'11:32', 'time5':'11:41', 'time6':'11:50', 'time7':'11:59'},
+                  {'label':'pm', 'time1':'12:08', 'time2':'12:17', 'time3':'12:26', 'time4':'12:35', 'time5':'12:44', 'time6':'12:53'},
+                  {'time1':'1:02', 'time2':'1:11', 'time3':'1:20', 'time4':'1:29', 'time5':'1:38', 'time6':'1:47', 'time7':'1:56'},
+                  {'time1':'2:05', 'time2':'2:14', 'time3':'2:23', 'time4':'2:32', 'time5':'2:41', 'time6':'2:50', 'time7':'2:59'},
+                  {'time1':'3:08', 'time2':'3:17', 'time3':'3:26', 'time4':'3:35', 'time5':'3:44', 'time6':'3:53'},
+                  {'time1':'4:02', 'time2':'4:11', 'time3':'4:20', 'time4':'4:29', 'time5':'4:38', 'time6':'4:47', 'time7':'4:56'},
+                  {'time1':'5:05', 'time2':'5:14', 'time3':'5:23', 'time4':'5:32'}
+            ];
+          }
         }
       }
     });
